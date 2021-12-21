@@ -51,3 +51,60 @@ function setup() {
 			arr.splice(smth, 1);
 		}
 	}
+
+
+// 	getEmpty();
+
+ 	a[3].pop();
+}
+
+function getEmpty() {
+	var loc = [];
+	for (thing of a) {
+		for (extra of thing) {
+			for (var i = 0; i < 4; i++) {
+				for (var j = 0; j < 4; j++) {
+					var x = extra.x / s;
+					var y = extra.y / s;
+					if (x == i && y == j) {
+						console.log(i, j);
+					} else {
+						console.log('EMPTY', i, j);
+					}
+				}
+			}
+		}
+	}
+	return loc;
+}
+
+function draw() {
+	background(0);
+	noStroke();
+	fill(0, 255, 255);
+	rectMode(CORNER)
+	rect(0, 0, width, height);
+	//______________________
+	for (var i = 0; i < a.length; i++) {
+		for (var j = 0; j < a[i].length; j++) {
+			a[i][j].draw(s);
+			if (mouseIsPressed & !sel & a[i][j].touch()) {
+				sel = a[i][j].n;
+				sell[0] = i;
+				sell[1] = j;
+			}
+		}
+	}
+
+	var qwerty = 0;
+
+	for (papa of a) {
+		for (bleh of papa) {
+			var xx = floor(bleh.x / bleh.r);
+			var yy = floor(bleh.y / bleh.r);
+			var vv = [xx, yy];
+			if (bleh.check(vv)) {
+				qwerty++;
+			}
+		}
+	}
