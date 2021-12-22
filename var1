@@ -108,3 +108,57 @@ function draw() {
 			}
 		}
 	}
+
+if (qwerty >= 15) {
+		noLoop();
+		stroke(0);
+		strokeWeight(5);
+		fill(230);
+		textAlign(CENTER, CENTER);
+		text('YOU WIN', width / 2, height / 2);
+	}
+
+	if (mouseIsPressed & !!sel) {
+		an = atan2(mouseY - my, mouseX - mx);
+	}
+}
+
+function Thing(x, y, r, n) {
+	this.n = n;
+	this.r = r;
+	this.x = x * this.r;
+	this.y = y * this.r;
+
+	this.draw = function(r) {
+		this.r = r;
+		x = this.x;
+		y = this.y;
+		var xx = floor(this.x / this.r);
+		var yy = floor(this.y / this.r);
+		var vv = [xx, yy];
+		//console.log('My Position : ',vv,"Solution :",sol[this.n],"Number :",this.n);
+		//noLoop();
+		var bool = this.check(vv);
+		if (bool) {
+			stroke(0, 50, 200);
+		} else {
+			stroke(100, 165, 255);
+		}
+		strokeWeight(r / 25);
+		rectMode(CENTER);
+		if (sel == this.n) {
+			fill(0, 100, 255);
+		} else {
+			fill(0, 50, 255);
+		}
+		rect(x + r / 2, y + r / 2, r / 1.2, r / 1.2);
+		noStroke();
+		fill((bool) ? color(0, 255, 100) : color(255, 100, 155));
+		textSize(r / 2);
+		textAlign(CENTER, CENTER);
+		text(this.n, x + r / 2, y + r / 2);
+	}
+
+	this.check = function(second) {
+		return (sol[this.n][0] == second[0] & sol[this.n][1] == second[1]);
+	}
